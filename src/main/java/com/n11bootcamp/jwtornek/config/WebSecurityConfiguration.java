@@ -51,7 +51,7 @@ public class WebSecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable) // CSRF korumasını devre dışı bırakıyoruz (REST API’lerde genelde kapatılır)
                 .authorizeHttpRequests(auth -> auth
                         // "/login" endpointine herkes erişebilir (token almak için giriş)
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/auth/login", "/auth/refresh").permitAll()
                         // Diğer tüm istekler kimlik doğrulaması gerektirir
                         .anyRequest().authenticated()
                 )

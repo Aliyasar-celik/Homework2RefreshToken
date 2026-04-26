@@ -19,7 +19,7 @@ Bu proje, sadece temel JWT kullanımını değil; aynı zamanda gerçek dünya u
 
 ---
 
-## ✅ Uygulanan Basit Refresh Token Akışı
+## Uygulanan Basit Refresh Token Akışı
 
 Sistem aşağıdaki şekilde çalışacak şekilde güncellendi:
 

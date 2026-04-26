@@ -16,3 +16,46 @@ Bu proje kapsamında aşağıdaki adımların gerçekleştirilmesi beklenmektedi
 - Güvenli ve sürdürülebilir bir authentication altyapısının oluşturulması
 
 Bu proje, sadece temel JWT kullanımını değil; aynı zamanda gerçek dünya uygulamalarında kullanılan **Refresh Token mimarisinin mantığını ve uygulanışını kavramayı** amaçlamaktadır.
+
+---
+
+## ✅ Uygulanan Basit Refresh Token Akışı
+
+Sistem aşağıdaki şekilde çalışacak şekilde güncellendi:
+
+1. `POST /auth/login` ile giriş yapılır.
+2. Başarılı girişte `accessToken` + `refreshToken` döner.
+3. `accessToken` korumalı endpointlerde (`/message`) `Authorization: Bearer <accessToken>` ile kullanılır.
+4. Access token süresi biterse `POST /auth/refresh` ile aynı refresh token gönderilerek yeni access token alınır.
+
+### Örnek İstekler
+
+#### Login
+
+```http
+POST /auth/login
+Content-Type: application/json
+
+{
+  "username": "ibrahimgokyar",
+  "password": "123"
+}
+```
+
+#### Refresh
+
+```http
+POST /auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "<login ile dönen refreshToken>"
+}
+```
+
+#### Korumalı Mesaj Endpointi
+
+```http
+GET /message
+Authorization: Bearer <accessToken>
+```
